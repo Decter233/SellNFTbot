@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: userbot
+    env: python
+    plan: free
+    buildCommand: ""
+    startCommand: python userbot.py
+    envVars:
+      - key: API_ID
+        value: your_api_id
+      - key: API_HASH
+        value: your_api_hash
+      - key: OWNER_ID
+        value: your_user_id
