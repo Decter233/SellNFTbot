@@ -1,5 +1,7 @@
 from telethon import TelegramClient, events
 import os
+import threading
+from webserver import app
 
 api_id = int(os.environ.get("API_ID"))
 api_hash = os.environ.get("API_HASH")
@@ -13,6 +15,11 @@ async def handler(event):
         await client.send_message(OWNER_ID, "🎁 Подарок получен!")
         await event.message.forward_to(OWNER_ID)
 
-print("Userbot запущен")
-client.start()
-client.run_until_disconnected()
+def start_web():
+    app.run(host="0.0.0.0", port=10000)
+
+if __name__ == "__main__":
+    threading.Thread(target=start_web).start()
+    print("Userbot запущен")
+    client.start()
+    client.run_until_disconnected()
